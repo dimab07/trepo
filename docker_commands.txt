@@ -1,0 +1,20 @@
+// show running docker containers
+docker ps
+// show all docker containers
+docker ps -a
+
+// remove all containers
+docker rm -f `docker ps -q -a`
+
+// run a container and connect to it
+docker run -it imagename 
+
+// run a container in the background
+docker run -itd imagename 
+
+// build an image from current directory labeled test1:latest
+docker build -t test1 .
+
+// list images
+docker images 
+

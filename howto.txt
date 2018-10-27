@@ -1,0 +1,33 @@
+export M2_HOME="${HOME}/apache-maven-3.3.9"
+export M2=${M2_HOME}/bin
+export PATH="${M2}:${PATH}"
+
+cd petclinic
+mvn package
+
+cat image_workdir/Dockerfile
+########
+FROM centos:6.8
+RUN yum install -y tomcat6
+COPY petclinic.war /usr/local/tomcat/webapps/
+COPY run_tomcat.sh /root/
+ENTRYPOINT ["/root/run_tomcat.sh"]
+#CMD [start]
+EXPOSE 8080
+#########
+
+
+cd ~/
+mkdir image_workdir
+cd image_workdir
+
+docker build -t petclinic .
+
+docker run -itd -p 8080:443 petclinic /bin/bash
+
+docker stop ....
+
+docker rm -f `docker ps -q -a`
+
+export PATH="${HOME}/gradle-3.1/bin:${PATH}"
+
